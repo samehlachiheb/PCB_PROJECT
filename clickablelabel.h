@@ -2,19 +2,20 @@
 #ifndef CLICKABLELABEL_H
 #define CLICKABLELABEL_H
 
-#include <QLabel>
+#include <QFrame>      // Ensure this is QFrame, not QLabel
 #include <QWidget>
-#include <QMouseEvent>
+#include <QMouseEvent> // Make sure QMouseEvent is included for mousePressEvent
 
-class ClickableLabel : public QLabel {
-    Q_OBJECT
+class ClickableLabel : public QFrame { // Ensure it publicly inherits from QFrame
+    Q_OBJECT // Essential for Qt's meta-object system (signals/slots)
 public:
-    explicit ClickableLabel(QWidget* parent = nullptr);
+    explicit ClickableLabel(QWidget* parent = nullptr); // Constructor
 
 signals:
-    void clicked();
+    void clicked(); // Signal emitted when the label is clicked
 
 protected:
+    // Override mousePressEvent to emit the clicked signal
     void mousePressEvent(QMouseEvent* event) override;
 };
 

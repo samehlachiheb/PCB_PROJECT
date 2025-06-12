@@ -13,6 +13,9 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <property name="toolTip">
     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;QScrollArea&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -20,44 +23,12 @@
    <property name="whatsThis">
     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;QScrollArea&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
-   <widget class="QPushButton" name="grayButton">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>270</y>
-      <width>161</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="cursor">
-     <cursorShape>PointingHandCursor</cursorShape>
-    </property>
-    <property name="text">
-     <string>Afficher masque N&amp;B</string>
-    </property>
-   </widget>
    <widget class="QPushButton" name="TraitementButton">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>310</y>
+      <x>380</x>
+      <y>340</y>
       <width>161</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="cursor">
-     <cursorShape>PointingHandCursor</cursorShape>
-    </property>
-    <property name="text">
-     <string>🎯Afficher les contours</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="SelectedImage">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>10</y>
-      <width>131</width>
       <height>31</height>
      </rect>
     </property>
@@ -65,28 +36,98 @@
      <cursorShape>PointingHandCursor</cursorShape>
     </property>
     <property name="styleSheet">
-     <string notr="true"/>
+     <string notr="true">QPushButton {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 15px;
+    font-weight: bold;
+}
+
+QPushButton:hover {
+    background-color: #7acef4;
+}
+
+QPushButton:pressed {
+    background-color: #7acef4;
+}</string>
     </property>
     <property name="text">
-     <string>📂 Charger une image</string>
+     <string>🔍Show edges</string>
     </property>
    </widget>
-   <widget class="QGroupBox" name="groupBox">
+   <widget class="QToolButton" name="SelectedImage">
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>60</y>
-      <width>281</width>
-      <height>201</height>
+      <y>20</y>
+      <width>131</width>
+      <height>41</height>
      </rect>
     </property>
     <property name="cursor">
      <cursorShape>PointingHandCursor</cursorShape>
     </property>
-    <property name="title">
-     <string>Paramètres de traitement</string>
+    <property name="toolTip">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;border: 2px solid #555;&lt;/p&gt;&lt;p&gt;border-radius: 25px;&lt;/p&gt;&lt;p&gt;background-color: #6c757d;&lt;/p&gt;&lt;p&gt;width: 50px;&lt;/p&gt;&lt;p&gt;height: 50px;&lt;/p&gt;&lt;p&gt;color: white;&lt;/p&gt;&lt;p&gt;font-weight: bold;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
-    <widget class="QSlider" name="sliderKsize">
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QToolButton {
+    width: 90px;
+    height: 90px;
+    border-radius: 45px; /* Rend le bouton circulaire */
+    background-color: #3498db; /* Couleur de fond gris clair */
+    color: black;  /* Couleur du texte noir */
+    border: none; /* Pas de bordure */
+    font-weight: bold; /* Texte en gras */
+}
+
+QToolButton:hover {
+    background-color:#7acef4;
+}
+
+QToolButton:pressed { /* Style au clic */
+    background-color:#7acef4;
+}</string>
+    </property>
+    <property name="text">
+     <string> 📷Load image</string>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>100</width>
+      <height>100</height>
+     </size>
+    </property>
+    <property name="arrowType">
+     <enum>Qt::ArrowType::NoArrow</enum>
+    </property>
+   </widget>
+   <widget class="QGroupBox" name="groupBox">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>120</y>
+      <width>281</width>
+      <height>401</height>
+     </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: white;
+font-weight: bold;
+</string>
+    </property>
+    <property name="title">
+     <string>Processing parameters</string>
+    </property>
+    <widget class="QSlider" name="sliderBlurKsize">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -99,10 +140,10 @@
       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
      <property name="maximum">
-      <number>21</number>
+      <number>10</number>
      </property>
      <property name="value">
-      <number>3</number>
+      <number>1</number>
      </property>
      <property name="orientation">
       <enum>Qt::Orientation::Horizontal</enum>
@@ -120,7 +161,7 @@
       <number>1</number>
      </property>
     </widget>
-    <widget class="QLabel" name="labelKsizeValue">
+    <widget class="QLabel" name="labelBlurKsizeValue">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -129,24 +170,41 @@
        <height>20</height>
       </rect>
      </property>
+     <property name="styleSheet">
+      <string notr="true">color: white;
+    background-color:#3498db;
+    padding: 5px;
+    border-radius: 3px;
+ font-weight: bold;</string>
+     </property>
      <property name="text">
-      <string>taille de noyau du filtre</string>
+      <string>Blur Kernel Size	</string>
      </property>
     </widget>
-    <widget class="QLabel" name="ksize_value">
+    <widget class="QLabel" name="value">
      <property name="geometry">
       <rect>
-       <x>230</x>
+       <x>210</x>
        <y>50</y>
-       <width>37</width>
-       <height>12</height>
+       <width>51</width>
+       <height>20</height>
       </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: #000000;
+    background-color: white
+; font-weight: bold;
+    padding: 5px;
+    border-radius: 3px;</string>
      </property>
      <property name="text">
       <string>TextLabel</string>
      </property>
+     <property name="scaledContents">
+      <bool>true</bool>
+     </property>
     </widget>
-    <widget class="QSlider" name="sliderLowThreshold">
+    <widget class="QSlider" name="sliderSigmaX">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -156,10 +214,10 @@
       </rect>
      </property>
      <property name="maximum">
-      <number>255</number>
+      <number>20</number>
      </property>
      <property name="value">
-      <number>70</number>
+      <number>5</number>
      </property>
      <property name="orientation">
       <enum>Qt::Orientation::Horizontal</enum>
@@ -171,46 +229,60 @@
       <number>5</number>
      </property>
     </widget>
-    <widget class="QLabel" name="labelLowValue">
+    <widget class="QLabel" name="labelSigmaXValue">
      <property name="geometry">
       <rect>
        <x>10</x>
        <y>80</y>
-       <width>161</width>
+       <width>151</width>
        <height>20</height>
       </rect>
      </property>
+     <property name="styleSheet">
+      <string notr="true">color: white;
+    background-color:#3498db;
+    padding: 5px;
+    border-radius: 3px;
+ font-weight: bold;</string>
+     </property>
      <property name="text">
-      <string>seuil bas de Canny</string>
+      <string>Blur Intensity (Sigma)	</string>
      </property>
     </widget>
-    <widget class="QLabel" name="low_value">
+    <widget class="QLabel" name="value_2">
      <property name="geometry">
       <rect>
-       <x>230</x>
+       <x>210</x>
        <y>110</y>
-       <width>37</width>
-       <height>12</height>
+       <width>51</width>
+       <height>21</height>
       </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: #000000;
+    background-color: white
+; font-weight: bold;
+    padding: 5px;
+    border-radius: 3px;</string>
      </property>
      <property name="text">
       <string>TextLabel</string>
      </property>
     </widget>
-    <widget class="QSlider" name="sliderHighThreshold">
+    <widget class="QSlider" name="sliderClaheClipLimit">
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>160</y>
+       <y>180</y>
        <width>160</width>
        <height>16</height>
       </rect>
      </property>
      <property name="maximum">
-      <number>255</number>
+      <number>50</number>
      </property>
      <property name="value">
-      <number>180</number>
+      <number>15</number>
      </property>
      <property name="orientation">
       <enum>Qt::Orientation::Horizontal</enum>
@@ -222,116 +294,552 @@
       <number>5</number>
      </property>
     </widget>
-    <widget class="QLabel" name="labelHighValue">
+    <widget class="QLabel" name="labelClaheClipLimitValue">
      <property name="geometry">
       <rect>
        <x>10</x>
        <y>140</y>
-       <width>121</width>
-       <height>16</height>
+       <width>151</width>
+       <height>21</height>
       </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: white;
+    background-color: #3498db;
+    padding: 5px;
+    border-radius: 3px;
+ font-weight: bold;
+</string>
      </property>
      <property name="text">
-      <string>seuil haut de Canny</string>
+      <string>Contrast Enhancement (CLAHE)</string>
      </property>
     </widget>
-    <widget class="QLabel" name="high_value">
+    <widget class="QLabel" name="value_3">
      <property name="geometry">
       <rect>
-       <x>230</x>
-       <y>160</y>
-       <width>37</width>
-       <height>12</height>
+       <x>210</x>
+       <y>180</y>
+       <width>51</width>
+       <height>20</height>
       </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: #000000;
+    background-color: white
+; font-weight: bold;
+    padding: 5px;
+    border-radius: 3px;</string>
      </property>
      <property name="text">
       <string>TextLabel</string>
+     </property>
+    </widget>
+    <widget class="QSlider" name="sliderSeparationKsize">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>250</y>
+       <width>160</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="maximum">
+      <number>15</number>
+     </property>
+     <property name="value">
+      <number>3</number>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Orientation::Horizontal</enum>
+     </property>
+     <property name="tickPosition">
+      <enum>QSlider::TickPosition::TicksBelow</enum>
+     </property>
+    </widget>
+    <widget class="QSlider" name="sliderFillHolesKsize">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>310</y>
+       <width>160</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="maximum">
+      <number>5</number>
+     </property>
+     <property name="value">
+      <number>1</number>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Orientation::Horizontal</enum>
+     </property>
+     <property name="tickPosition">
+      <enum>QSlider::TickPosition::TicksBelow</enum>
+     </property>
+    </widget>
+    <widget class="QSlider" name="sliderContourMinArea">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>370</y>
+       <width>160</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="maximum">
+      <number>500</number>
+     </property>
+     <property name="value">
+      <number>50</number>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Orientation::Horizontal</enum>
+     </property>
+     <property name="tickPosition">
+      <enum>QSlider::TickPosition::TicksBelow</enum>
+     </property>
+    </widget>
+    <widget class="QLabel" name="labelContourMinAreaValue">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>342</y>
+       <width>151</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: white;
+    background-color: #3498db;
+    padding: 5px;
+    border-radius: 3px;
+ font-weight: bold;
+</string>
+     </property>
+     <property name="text">
+      <string>Minimum Component Size</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="labelFillHolesKsizeValue">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>280</y>
+       <width>151</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: white;
+    background-color: #3498db;
+    padding: 5px;
+    border-radius: 3px;
+ font-weight: bold;
+</string>
+     </property>
+     <property name="text">
+      <string>Fill Holes	</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="labelSeparationKsizeValue">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>210</y>
+       <width>151</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: white;
+    background-color: #3498db;
+    padding: 5px;
+    border-radius: 3px;
+ font-weight: bold;
+</string>
+     </property>
+     <property name="text">
+      <string>Component Separation</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="value_4">
+     <property name="geometry">
+      <rect>
+       <x>210</x>
+       <y>250</y>
+       <width>51</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: #000000;
+    background-color: white
+; font-weight: bold;
+    padding: 5px;
+    border-radius: 3px;</string>
+     </property>
+     <property name="text">
+      <string>TextLabel</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="value_5">
+     <property name="geometry">
+      <rect>
+       <x>210</x>
+       <y>310</y>
+       <width>51</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: #000000;
+    background-color: white
+; font-weight: bold;
+    padding: 5px;
+    border-radius: 3px;</string>
+     </property>
+     <property name="text">
+      <string>TextLabel</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="value_6">
+     <property name="geometry">
+      <rect>
+       <x>210</x>
+       <y>370</y>
+       <width>51</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: #000000;
+    background-color: white
+; font-weight: bold;
+    padding: 5px;
+    border-radius: 3px;</string>
+     </property>
+     <property name="text">
+      <string>TextLabel</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="ClickableLabel" name="labelImage">
+    <property name="geometry">
+     <rect>
+      <x>310</x>
+      <y>80</y>
+      <width>300</width>
+      <height>250</height>
+     </rect>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::Shape::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Shadow::Raised</enum>
+    </property>
+    <widget class="QLabel" name="labelImage_2">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>300</width>
+       <height>250</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </widget>
+   <widget class="ClickableLabel" name="labelImage_Mask">
+    <property name="geometry">
+     <rect>
+      <x>620</x>
+      <y>80</y>
+      <width>300</width>
+      <height>250</height>
+     </rect>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::Shape::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Shadow::Raised</enum>
+    </property>
+    <widget class="QLabel" name="labelImage_Mask_2">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>300</width>
+       <height>250</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
      </property>
     </widget>
    </widget>
    <widget class="ClickableLabel" name="labelImage_contours">
     <property name="geometry">
      <rect>
-      <x>320</x>
-      <y>300</y>
-      <width>341</width>
-      <height>301</height>
+      <x>310</x>
+      <y>380</y>
+      <width>300</width>
+      <height>250</height>
      </rect>
     </property>
-    <property name="text">
-     <string>                                        &quot;Image avec contours ici&quot;</string>
+    <property name="frameShape">
+     <enum>QFrame::Shape::StyledPanel</enum>
     </property>
-    <property name="scaledContents">
-     <bool>true</bool>
+    <property name="frameShadow">
+     <enum>QFrame::Shadow::Raised</enum>
     </property>
+    <widget class="QLabel" name="labelImage_contours_2">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>300</width>
+       <height>250</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
+     </property>
+    </widget>
    </widget>
-   <widget class="ClickableLabel" name="labelImage">
+   <widget class="ClickableLabel" name="labelResult">
     <property name="geometry">
      <rect>
-      <x>320</x>
-      <y>20</y>
-      <width>351</width>
-      <height>271</height>
+      <x>620</x>
+      <y>380</y>
+      <width>300</width>
+      <height>250</height>
      </rect>
     </property>
-    <property name="text">
-     <string>                                                  &quot;Image originale ici&quot;</string>
+    <property name="frameShape">
+     <enum>QFrame::Shape::StyledPanel</enum>
     </property>
-    <property name="scaledContents">
-     <bool>true</bool>
+    <property name="frameShadow">
+     <enum>QFrame::Shadow::Raised</enum>
+    </property>
+    <widget class="QLabel" name="labelResult_2">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>-1</y>
+       <width>300</width>
+       <height>250</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>940</x>
+      <y>30</y>
+      <width>191</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: white;
+font-weight: bold;</string>
+    </property>
+    <property name="text">
+     <string>        📂 List of electronic components</string>
     </property>
    </widget>
-   <widget class="ClickableLabel" name="labelImage_Mask">
+   <widget class="QListWidget" name="listWidgetComponents">
+    <property name="geometry">
+     <rect>
+      <x>940</x>
+      <y>80</y>
+      <width>256</width>
+      <height>561</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="TraitementButton_2">
+    <property name="geometry">
+     <rect>
+      <x>680</x>
+      <y>340</y>
+      <width>161</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 15px;
+    font-weight: bold;
+}
+
+QPushButton:hover {
+    background-color: #7acef4;
+}
+
+QPushButton:pressed {
+    background-color: #7acef4;
+}
+</string>
+    </property>
+    <property name="text">
+     <string>Show Result</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="ClearButton">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>20</y>
+      <width>81</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 15px;
+    font-weight: bold;
+}
+
+QPushButton:hover {
+    background-color: #7acef4;
+}
+
+QPushButton:pressed {
+    background-color: #7acef4;
+}</string>
+    </property>
+    <property name="text">
+     <string>🔄Reset</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="grayButton">
     <property name="geometry">
      <rect>
       <x>690</x>
-      <y>20</y>
-      <width>351</width>
-      <height>271</height>
+      <y>40</y>
+      <width>161</width>
+      <height>31</height>
      </rect>
     </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 15px;
+    font-weight: bold;
+}
+
+QPushButton:hover {
+    background-color: #7acef4;
+}
+
+QPushButton:pressed {
+    background-color: #7acef4;
+}</string>
+    </property>
     <property name="text">
-     <string>                        &quot;Image avec masque ici&quot;</string>
+     <string>⚙️Treat </string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>530</y>
+      <width>101</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: white;
+    background-color: #3498db
+;
+    padding: 5px;
+    border-radius: 3px; font-weight: bold;</string>
+    </property>
+    <property name="text">
+     <string>Number of components </string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>560</y>
+      <width>61</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: #000000;
+    background-color: white
+; font-weight: bold;
+    padding: 5px;
+    border-radius: 3px;</string>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QPushButton" name="SaveMaskButton">
-    <property name="geometry">
-     <rect>
-      <x>800</x>
-      <y>310</y>
-      <width>131</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>💾Enregistrer </string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="SavecontoursButton">
-    <property name="geometry">
-     <rect>
-      <x>420</x>
-      <y>610</y>
-      <width>131</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>💾Enregistrer </string>
-    </property>
-   </widget>
    <zorder>groupBox</zorder>
-   <zorder>grayButton</zorder>
    <zorder>TraitementButton</zorder>
    <zorder>SelectedImage</zorder>
-   <zorder>labelImage_contours</zorder>
    <zorder>labelImage</zorder>
    <zorder>labelImage_Mask</zorder>
-   <zorder>SaveMaskButton</zorder>
-   <zorder>SavecontoursButton</zorder>
+   <zorder>labelImage_contours</zorder>
+   <zorder>labelResult</zorder>
+   <zorder>label</zorder>
+   <zorder>listWidgetComponents</zorder>
+   <zorder>TraitementButton_2</zorder>
+   <zorder>ClearButton</zorder>
+   <zorder>grayButton</zorder>
+   <zorder>label_2</zorder>
+   <zorder>label_3</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -348,8 +856,9 @@
  <customwidgets>
   <customwidget>
    <class>ClickableLabel</class>
-   <extends>QLabel</extends>
-   <header>clickablelabel.h</header>
+   <extends>QFrame</extends>
+   <header location="global">clickablelabel.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources/>

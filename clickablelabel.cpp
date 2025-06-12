@@ -1,8 +1,7 @@
-// clickablelabel.cpp
 #include "clickablelabel.h"
 
 ClickableLabel::ClickableLabel(QWidget* parent)
-    : QLabel(parent)
+    : QFrame(parent) // Change from QLabel(parent) to QFrame(parent)
 {
 
 }
@@ -10,5 +9,5 @@ ClickableLabel::ClickableLabel(QWidget* parent)
 void ClickableLabel::mousePressEvent(QMouseEvent* event)
 {
     emit clicked();
-    QLabel::mousePressEvent(event);
+    QFrame::mousePressEvent(event); // Change from QLabel::mousePressEvent(event) to QFrame::mousePressEvent(event)
 }

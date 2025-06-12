@@ -31,8 +31,9 @@ set(PROJECT_SOURCES
     mainwindow.ui
     imagewindow.h
     imagewindow.cpp
-
     imagewindow.ui
+    clickablelabel.cpp
+    clickablelabel.h
     ${TS_FILES}
 )
 
@@ -42,8 +43,11 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
 
+        # Ces lignes sont déjà incluses via PROJECT_SOURCES, mais les laisser ici ne nuit pas.
+        # Vous pourriez les retirer pour plus de concision.
         imagewindow.h imagewindow.cpp imagewindow.ui
         clickablelabel.h clickablelabel.cpp
+        composant.h composant.cpp
     )
     qt_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TS_FILES})
 else()
@@ -55,8 +59,11 @@ else()
     qt5_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TS_FILES})
 endif()
 
-# 📥 Inclusion des headers OpenCV
-target_include_directories(PCB_PROJECT PRIVATE ${OpenCV_INCLUDE_DIRS})
+# 📥 Inclusion des headers du projet et OpenCV
+target_include_directories(PCB_PROJECT PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR} # AJOUTEZ CETTE LIGNE !
+    ${OpenCV_INCLUDE_DIRS}
+)
 
 # 🔗 Lier Qt et OpenCV
 target_link_libraries(PCB_PROJECT PRIVATE
@@ -92,9 +99,6 @@ set(CMAKE_VERBOSE_MAKEFILE ON)
 if(QT_VERSION_MAJOR EQUAL 6)
     qt_finalize_executable(PCB_PROJECT)
 endif()
-
-
-
 #il faut changer le kit d'exécution de Qt MinGW 64-bit car
 # lier OpenCV construit avec MSVC (.lib),  est incompatible avec MinGW.
 #donc il faut changer en MSVC

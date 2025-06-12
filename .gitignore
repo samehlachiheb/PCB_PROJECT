@@ -1,0 +1,3 @@
+# Ignorer le dossier build (fichiers compilés)
+build/
+
