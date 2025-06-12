@@ -53,10 +53,10 @@ private slots:
 
     // Slots pour recevoir les images et la liste des composants de ImageWindow
     void displayContoursImage(const QPixmap& resultPixmap);
-    // MODIFIÉ : Ce slot va maintenant stocker la liste et afficher CONDITIONNELLEMENT
+    //  Ce slot va maintenant stocker la liste et afficher CONDITIONNELLEMENT
     void displayDetectedComponentsInList(const QList<Composant>& components);
 
-    // MODIFIÉ : Ce slot va maintenant stocker le pixmap et afficher CONDITIONNELLEMENT
+    //  Ce slot va maintenant stocker le pixmap et afficher CONDITIONNELLEMENT
     void displayExtractedComponentsImage(const QPixmap& extractedComponentsPixmap);
 
     // Ce slot est appelé par TraitementButton_2 pour afficher les résultats complets
@@ -67,16 +67,14 @@ private:
     cv::Mat image;
     ImageWindow *maskWindow;
     ImageWindow *resultWindow;
-    // Note : m_componentListWidget et m_componentCountLabel ne sont plus nécessaires
-    // en tant que membres si vous accédez directement via ui->. Je les ai retirés ici
-    // pour simplification, mais assurez-vous de leur existence dans votre .ui.
+
     QListWidget *m_componentListWidget;
     QLabel *m_componentCountLabel;
 
     QPixmap m_lastExtractedComponentsPixmap;
     QList<Composant> m_lastDetectedComponents;
 
-    // NOUVEAU MEMBRE : Contrôle l'affichage des résultats complets
+
     bool m_displayFullResults;
 
 

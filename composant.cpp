@@ -1,3 +1,7 @@
+//Cette classe C++ nommée Composant est conçue pour représenter et stocker les informations relatives
+//à un composant électronique individuel qui a été détecté
+//et extrait d'une image de circuit imprimé (PCB). En d'autres termes,
+//c'est comme une "fiche d'identité" pour chaque pièce trouvée sur la carte.
 // composant.cpp
 #include "composant.h"
 
