@@ -783,6 +783,37 @@ QPushButton:pressed {
      <string>⚙️Treat </string>
     </property>
    </widget>
+   <widget class="QPushButton" name="paintingButton">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>540</y>
+      <width>161</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 15px;
+    font-weight: bold;
+}
+
+QPushButton:hover {
+    background-color: #7acef4;
+}
+
+QPushButton:pressed {
+    background-color: #7acef4;
+}</string>
+    </property>
+    <property name="text">
+     <string>Manual components</string>
+    </property>
+   </widget>
    <zorder>groupBox</zorder>
    <zorder>TraitementButton</zorder>
    <zorder>SelectedImage</zorder>
@@ -795,6 +826,7 @@ QPushButton:pressed {
    <zorder>TraitementButton_2</zorder>
    <zorder>ClearButton</zorder>
    <zorder>grayButton</zorder>
+   <zorder>paintingButton</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

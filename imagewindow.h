@@ -147,6 +147,9 @@ private:
      * @return La QPixmap résultante.
      */
     QPixmap cvMatToQPixmap(const cv::Mat& mat);
+public:
+    cv::Mat getExtractedComponentsOnBlankMat() const;
+
 };
 
 #endif // IMAGEWINDOW_H

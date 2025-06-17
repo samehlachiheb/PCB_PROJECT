@@ -48,6 +48,8 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         imagewindow.h imagewindow.cpp imagewindow.ui
         clickablelabel.h clickablelabel.cpp
         composant.h composant.cpp
+        imageviewer.h imageviewer.cpp imageviewer.ui
+        drawingwindow.h drawingwindow.cpp
     )
     qt_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TS_FILES})
 else()

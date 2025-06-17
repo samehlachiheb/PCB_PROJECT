@@ -17,7 +17,8 @@
 #include <QSlider>         // Widget slider pour ajuster des valeurs
 #include "composant.h"     // Votre classe personnalisée 'Composant' pour représenter les composants détectés
 #include <QDebug>         // Pour les messages de débogage dans la console
-
+#include <QPushButton> // Required for QPushButton (already there, keep it)
+#include "drawingwindow.h" // Include for the new drawing window (already there, keep it)
 
 
 // Constructeur de la classe MainWindow
@@ -96,6 +97,17 @@ MainWindow::MainWindow(QWidget *parent)
     // Connexion du bouton de sélection d'image au slot loadImageFromFile
     connect(ui->SelectedImage, &QPushButton::clicked, this, &MainWindow::loadImageFromFile);
 
+    // REMOVED: Programmatic creation of 'paintContoursButton' and layout management
+    // If you add the button in Qt Designer and name it 'paintingButton'
+    // You only need to connect its clicked signal:
+    if (ui->paintingButton) { // Check if the button exists in the UI
+        ui->paintingButton->setToolTip("Open a new window to manually draw contours on the original image.");
+        connect(ui->paintingButton, &QPushButton::clicked, this, &MainWindow::onOpenDrawingWindow);
+    } else {
+        qWarning() << "QPushButton 'paintingButton' not found in the UI. Make sure its object name is correct.";
+    }
+
+
     // Connexions des sliders et initialisation des valeurs affichées
     // Chaque slider est connecté à deux slots :
     // 1. Un slot pour mettre à jour la valeur affichée à côté du slider.
@@ -156,10 +168,30 @@ MainWindow::MainWindow(QWidget *parent)
                 imgfen1->showRawImage(gray);
                 imgfen1->show();
             } else {
-                QMessageBox::information(this, "Info", "Click 'Process' first."); // Message si le traitement n'est pas fait
+                QMessageBox::information(this, "Info", "Click 'Treat' first."); // Message si le traitement n'est pas fait
             }
         }
     });
+
+
+    connect(ui->labelResult,&ClickableLabel::clicked,this,[=]() {
+        if (resultWindow) {
+            cv::Mat extracted = resultWindow->getExtractedComponentsOnBlankMat();
+
+            if (!extracted.empty()) {
+                ImageWindow *imgfen2 = new ImageWindow(this);
+                imgfen2->setWindowTitle("Components detected on white background");
+
+                imgfen2->showRawImage(extracted);
+                imgfen2->show();
+            } else {
+                QMessageBox::information(this, "Info", "No results.");
+            }
+        } else {
+            QMessageBox::information(this, "Info", "Please start processing first.");
+        }
+    });
+
 
     connect(ui->labelImage_contours, &ClickableLabel::clicked, this, [=]() {
         if (resultWindow) { // Vérifie si la fenêtre de résultats existe
@@ -170,7 +202,7 @@ MainWindow::MainWindow(QWidget *parent)
         }
     });
 
-    // Connexion du bouton "TraitementButton_2" (bouton "Traiter" pour les composants extraits)
+    // Connexion du bouton "TraitementButton_2" ("show Result")
     if (ui->TraitementButton_2) {
         connect(ui->TraitementButton_2, &QPushButton::clicked, this, &MainWindow::showExtractedComponentsImageAndList);
         ui->TraitementButton_2->setToolTip("Show image of extracted components and update list.");
@@ -217,7 +249,7 @@ MainWindow::MainWindow(QWidget *parent)
         connect(resultWindow, &ImageWindow::imageProcessed, this, &MainWindow::displayContoursImage);
         connect(resultWindow, &ImageWindow::extractedComponentsImageReady, this, &MainWindow::displayExtractedComponentsImage);
 
-        // NOUVEAU : Réinitialise le flag d'affichage complet.
+        // Réinitialise le flag d'affichage complet.
         // Cela signifie que même si les calculs sont faits, l'image finale des composants
         // et la liste ne seront PAS affichées tant que `TraitementButton_2` n'est pas cliqué.
         m_displayFullResults = false;
@@ -359,7 +391,7 @@ void MainWindow::displayExtractedComponentsImage(const QPixmap& extractedCompone
 
     if (m_displayFullResults) { // Affichage conditionnel basé sur le flag
         qDebug() << "displayExtractedComponentsImage: m_displayFullResults est TRUE. Affichage de l'image extraite.";
-        if (ui->labelResult_2) {
+        if (ui->labelResult) {
             // Affiche l'image extraite dans le QLabel
             ui->labelResult_2->setPixmap(extractedComponentsPixmap.scaled(
                 ui->labelResult_2->size(),
@@ -401,7 +433,7 @@ void MainWindow::displayDetectedComponentsInList(const QList<Composant>& compone
                 ui->listWidgetComponents->addItem(item); // Ajoute l'élément à la liste
             }
         } else {
-            qWarning() << "QListWidget 'listWidgetComponents' not initialized in MainWindow.";
+            qWarning() << "QListWidget 'listWidgetComponents' non initialized in MainWindow.";
         }
     } else {
         qDebug() << "displayDetectedComponentsInList: m_displayFullResults is FALSE. Clearing list and counter.";
@@ -465,6 +497,27 @@ void MainWindow::showExtractedComponentsImageAndList() {
 
     afficherMessage(this,"Display of extracted components and list updated!", "Info", QMessageBox::Information, 1000);
 }
+
+/**
+ * @brief NOUVEAU SLOT : Ouvre une nouvelle fenêtre `DrawingWindow` pour dessiner des contours.
+ * Ce slot est appelé par le bouton "Paint Contours".
+ */
+void MainWindow::onOpenDrawingWindow() {
+    if (image.empty()) {
+        QMessageBox::warning(this, "No Image Loaded", "Please load an image first before trying to paint contours.");
+        return;
+    }
+
+    // Crée une nouvelle instance de DrawingWindow
+    DrawingWindow *drawingWindow = new DrawingWindow(this); // Set 'this' as parent for proper memory management
+    drawingWindow->setOriginalImage(image); // Passe l'image originale chargée dans MainWindow à la nouvelle fenêtre
+    drawingWindow->show(); // Affiche la nouvelle fenêtre
+
+    // IMPORTANT: Make sure the new window is deleted when closed to prevent memory leaks.
+    // Setting Qt::WA_DeleteOnClose ensures this.
+    drawingWindow->setAttribute(Qt::WA_DeleteOnClose);
+}
+
 
 /**
  * @brief Gestionnaire de l'événement de redimensionnement de la fenêtre.

@@ -1,5 +1,5 @@
 #include "clickablelabel.h"
-
+#include<QFrame>
 ClickableLabel::ClickableLabel(QWidget* parent)
     : QFrame(parent) // Change from QLabel(parent) to QFrame(parent)
 {
